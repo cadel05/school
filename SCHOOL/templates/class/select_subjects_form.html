@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>Select Subjects</h1>
+
+    <table class="table">
+		<tr>
+			<td>
+				<h3>Select</h3>
+			</td>
+			
+			<td>
+				<h3>Subject</h3>
+			</td>
+			
+			<td>
+				<h3>Teacher</h3>
+			</td>
+			
+			<td>
+				<h3>Class</h3>
+			</td>
+			
+			<td>
+				<h3>Day and Times</h3>
+			</td>
+		</tr>
+	
+    <form action="" method="post" class='form-horizontal' name='SubjectRegisterForm'>
+        {% csrf_token %}
+		<input type='hidden' name='student' value='{{ student_id }}'/>
+        {{form}}
+    </form>
+	</table>
+{% endblock %}

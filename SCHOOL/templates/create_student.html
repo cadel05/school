@@ -1,0 +1,431 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class = "row">
+<h1>Student Registration Form</h1>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <form action="{% url 'create_student' %}" method="post" class='form-inline'>
+	
+		 {% csrf_token %}
+		 <h2>Student Information</h2><hr/>
+	<!--Gender-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			{{ form.non_field_errors }}
+			<div class="fieldWrapper">
+				{{ form.student_gender.errors }}
+			<label for ="{{ form.student_gender.id_for_label }}">*Gender</label><br/>
+			{{ form.student_gender }}
+			</div>
+		</div>
+	</div>
+		<!--First Name-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.student_first_name.errors }}
+			<label for ="{{ form.student_first_name.id_for_label }}">*First Name</label><br/>
+			{{ form.student_first_name }}
+			</div>
+		</div>
+	</div>
+		<!--Last Name-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.student_last_name.errors }}
+			<label for ="{{ form.student_last_name.id_for_label }}">*Last Name</label><br/>
+			 {{ form.student_last_name }}
+			</div>
+		</div>
+	</div>
+		<!--Dob-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.student_dob.errors }}
+			<label for ="{{ form.student_dob.id_for_label }}">*Dob</label><br/>
+			{{ form.student_dob }}
+			</div>
+		</div>
+	</div>
+		<!--Allergies-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.student_allergies.errors }}
+			<label for ="{{ form.student_allergies.id_for_label }}">Allergies</label><br/>
+				{{ form.student_allergies }} 
+			</div>
+		</div>
+	</div>
+		<!--Medical Conditions-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.student_medical_conditions.errors }}
+			<label for ="{{ form.student_medical_conditions.id_for_label }}">Medical Conditions</label><br/>
+				{{ form.student_medical_conditions }} 
+			</div>
+		</div>
+	</div>
+		<!--Reglious Belief-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.student_religious_belief.errors }}
+			<label for ="{{ form.student_religious_belief.id_for_label }}">Religious Belief</label><br/>
+				{{ form.student_religious_belief }}
+			</div>
+		</div>
+	</div>
+		<!--Stdent Email-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.student_email.errors }}
+			<label for ="{{ form.student_email.id_for_label }}">*Email</label><br/>
+			 {{ form.student_email }}
+			</div>
+		</div>
+	</div>
+	<!-- Student Address -->
+	<!--Stdent Street-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.student_home_street.errors }}
+			<label for ="{{ form.student_home_street.id_for_label }}">*Student Home Street Address</label><br/>
+			 {{ form.student_home_street }}
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.student_home_town.errors }}
+			<label for ="{{ form.student_home_town.id_for_label }}">Student Home Town Address</label><br/>
+			 {{ form.student_home_town }}
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.student_home_city.errors }}
+			<label for ="{{ form.student_home_city.id_for_label }}">Student Home City Address</label><br/>
+			 {{ form.student_home_city }}
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.student_home_country.errors }}
+			<label for ="{{ form.student_home_country.id_for_label }}">*Student Home Country Address</label><br/>
+			 {{ form.student_home_country}}
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.student_home_phone.errors }}
+			<label for ="{{ form.student_home_phone.id_for_label }}">Student Home Phone Number</label><br/>
+			 {{ form.student_home_phone }}
+			</div>
+		</div>
+	</div>
+	<!-- End of Address -->
+		<!--Guardian/Parent Gender-->
+	<div class="col-md-12">
+		<h2>Guardian Information</h2>
+		<hr/>
+		<h3>Primary Parent/Guardian Information</h3>
+	</div>
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.father_relationship.errors }}
+			<label for ="{{ form.father_relationship.id_for_label }}">*Guardian/Parent Gender</label><br/>
+				{{ form.father_relationship}} 
+			</div>
+		</div> 
+	</div>
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.father_gender.errors }}
+			<label for ="{{ form.father_gender.id_for_label }}">*Guardian/Parent Gender</label><br/>
+				{{ form.father_gender}} 
+			</div>
+		</div> 
+	</div>
+	<!--Guardian/Parent First Name-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.father_first_name.errors }}
+			<label for ="{{ form.father_first_name.id_for_label }}">*Guardian/Parent First Name</label><br/>
+				{{ form.father_first_name}}
+			</div>
+		</div>
+	</div>
+	<!--Guardian/Parent Last NAme-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.father_last_name.errors }}
+			<label for ="{{ form.father_first_name.id_for_label }}">*Guardian/Parent Last Name</label><br/>
+				{{ form.father_last_name}}
+			</div>
+		</div>
+	</div>
+	<!--Guardian/Parent Cell Phone-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.father_phone.errors }}
+			<label for ="{{ form.father_first_name.id_for_label }}">*Guardian/Parent Cell Phone</label><br/>
+				{{ form.father_phone}} 
+			</div>
+		</div>
+	</div>
+	<!--Guardian/Parent Email-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.father_email.errors }}
+			<label for ="{{ form.father_email.id_for_label }}">*Guardian/Parent Email</label><br/>
+				{{ form.father_email}}
+			</div>
+		</div>
+	</div>
+	<!--Guardian/Parent Fax-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.father_last_name.errors }}
+			<label for ="{{ form.father_fax.id_for_label }}">Guardian/Parent Fax</label><br/>
+				{{ form.father_fax}}
+			</div>
+		</div>
+	</div>
+	<!--Guardian/Parent Work Name-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.father_work_name.errors }}
+			<label for ="{{ form.father_work_name.id_for_label }}">Guardian/Parent Organization Name</label><br/>
+				{{ form.father_work_name}} 
+			</div>
+		</div>
+	</div>
+	<!--Guardian/Parent Work Number-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.father_work_phone.errors }}
+			<label for ="{{ form.father_work_phone.id_for_label }}">Guardian/Parent Organization Phone</label><br/>
+				{{ form.father_work_phone}}
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+	</div>
+	<br>
+	<!--Guardian/Parent address-->
+	<div class="col-md-12">
+		<h3>Guardian's Address if same as student leave fields blank</h3>
+	</div>
+	<!--Guardian/Parent Home Street-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.father_home_street.errors }}
+			<label for ="{{ form.father_home_street.id_for_label }}">Guardian/Parent Home Street Address</label><br/>
+				{{ form.father_home_street}}
+			</div>
+		</div>
+	</div>
+	<!--Guardian/Parent Home Town-->
+		<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.father_home_town.errors }}
+			<label for ="{{ form.father_home_town.id_for_label }}">Guardian/Parent Home Town Address</label><br/>
+				{{ form.father_home_town}}
+			</div>
+		</div>
+	</div>
+	<!--Guardian/Parent Home City-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.father_home_city.errors }}
+			<label for ="{{ form.father_home_city.id_for_label }}">Guardian/Parent Home City Address</label><br/>
+				{{ form.father_home_city}}
+			</div>
+		</div>
+	</div>
+	<!--Guardian/Parent Home Country-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.father_home_country.errors }}
+			<label for ="{{ form.father_home_country.id_for_label }}">Guardian/Parent Home Country Address</label><br/>
+				{{ form.father_home_country}} 
+			</div>
+		</div>
+	</div>
+	<!--Guardian/Parent-->
+	<div class="col-md-12">
+		<hr/>
+		<h2>Secondary Guardian/Parent Information</h2>
+	</div>
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.mother_relationship.errors }}
+			<label for ="{{ form.father_relationship.id_for_label }}">*Guardian/Parent Gender</label><br/>
+				{{ form.mother_relationship}} 
+			</div>
+		</div> 
+	</div>
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.mother_gender.errors }}
+			<label for ="{{ form.mother_gender.id_for_label }}">*Guardian/Parent Gender</label><br/>
+				{{ form.mother_gender}} 
+			</div>
+		</div> 
+	</div>
+	<!-- Guardian/Parent First Name-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.mother_first_name.errors }}
+			<label for ="{{ form.mother_first_name.id_for_label }}">*Guardian/Parent First Name</label><br/>
+				{{ form.mother_first_name}}
+			</div>
+		</div>
+	</div>
+	<!--Guardian/Parent Last NAme-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.mother_last_name.errors }}
+			<label for ="{{ form.mother_first_name.id_for_label }}">*Guardian/Parent Last Name</label><br/>
+				{{ form.mother_last_name}}
+			</div>
+		</div>
+	</div>
+	<!--Guardian/Parent Cell Phone-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.mother_phone.errors }}
+			<label for ="{{ form.mother_first_name.id_for_label }}">*Guardian/Parent Cell Phone</label><br/>
+				{{ form.mother_phone}}
+			</div>
+		</div>
+	</div>
+	<!--Guardian/Parent Email-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.mother_email.errors }}
+			<label for ="{{ form.mother_email.id_for_label }}">*Guardian/Parent Email</label><br/>
+				{{ form.mother_email}} 
+			</div>
+		</div>
+	</div>
+	<!--Guardian/Parent Fax-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.mother_last_name.errors }}
+			<label for ="{{ form.mother_fax.id_for_label }}">Guardian/Parent Fax</label><br/>
+			 {{ form.mother_fax}}
+			</div>
+		</div>
+	</div>
+	<!--Guardian/Parent Work Name-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.mother_work_name.errors }}
+			<label for ="{{ form.mother_work_name.id_for_label }}">Guardian/Parent Organization Name</label><br/>
+				{{ form.mother_work_name}}
+			</div>
+		</div>
+	</div>
+	<!--Guardian/Parent Work Number-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.mother_work_phone.errors }}
+			<label for ="{{ form.mother_work_phone.id_for_label }}">Guardian/Parent Organization Phone</label><br/>
+				{{ form.mother_work_phone}}
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+	</div>
+	<br>
+	<!--Guardian/Parent address-->
+	<div class="col-md-12">
+		<h3>Guardian/Parent's Address if same as student leave fields blank</h3>
+	</div>
+	<!--Guardian/Parent Home Street-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.mother_home_street.errors }}
+			<label for ="{{ form.mother_home_street.id_for_label }}">Guardian/Parent Home Street Address</label><br/>
+				{{ form.mother_home_street}}
+			</div>
+		</div>
+	</div>
+	<!--Guardian/Parent Home Town-->
+		<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.mother_home_town.errors }}
+			<label for ="{{ form.mother_home_town.id_for_label }}">Guardian/Parent Home Town Address</label><br/>
+			 {{ form.mother_home_town}}
+			</div>
+		</div>
+	</div>
+	<!-- Guardian/Parent Home City-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.mother_home_city.errors }}
+			<label for ="{{ form.father_home_city.id_for_label }}">Guardian/Parent Home City Address</label><br/>
+				{{ form.mother_home_city}}
+			</div>
+		</div>
+	</div>
+	<!--Guardian/Parent Home Country-->
+	<div class="col-md-4">
+		<div class="form-group">        
+			<div class="fieldWrapper">
+				{{ form.mother_home_country.errors }}
+			<label for ="{{ form.mother_home_country.id_for_label }}">Guardian/Parent Home Country Address</label><br/>
+				{{ form.mother_home_country}}
+			</div>
+		</div>
+	</div>
+	<!--End Guardian/Parent-->
+	<div class="col-md-4">
+	</div>
+	<div class="col-md-12">
+    <br><br>    <input type="submit" value="Submit" />
+	</div>
+</div>
+    </form>
+</div>
+{% endblock %}

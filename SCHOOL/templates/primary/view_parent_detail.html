@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Registered Parents/Guardian Details</h1>
+
+    {% if all %}
+	<table class="table">
+    {% for p in all %}
+		<tr>
+			<th>
+			First Name:
+			</th>
+			<td>
+			{{ p.parent.first_name }}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Last Name 
+			</th>
+			<td>
+				{{ p.parent.last_name }}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Email: 
+			</th>
+			<td>
+				{{ p.parent.email }}
+			</td>
+		</tr>
+		<tr>
+			<th>Cell Phone:</th>
+			<td>
+			{{ p.cell_phone }}
+			</td>
+			</td>
+		</tr>
+		<tr>
+			<th>Work Name: </th>
+			<td>
+				{{ p.work_name }}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Work Phone:
+			</th>
+			<td>
+				{{ p.work_phone }}
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Relationship: 
+			</th>
+			<td>
+				{{ p.relationship }}
+			</td>
+		</tr>
+	</tr>
+	
+
+		<tr>
+			<th> Address </th>
+			<td>
+				<ol>
+				{% for a in p.address.all %}
+					<li> 
+						{{ a.street }}
+						<br>
+						{% if a.town %}
+							{{ a.town}}
+							<br/>
+						{% endif %}
+						{% if a.city %}
+							{{a.city
+							<br>
+						{% endif %}
+						
+						{{a.country}}
+						<br/><a href="/school/view/parent/update/address/{{p.id}}/{{a.id}}">Update Address</a>
+					</li>
+				{% endfor %}
+				<hr/>
+				</ol>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="/school/view/parent/update/{{p.id}}">Update Profile</a></td>
+      </tr>
+      {% endfor %}
+
+    </table>
+    {% else %}
+      <p>There are no students registered.</p>
+    {% endif %}       
+{% endblock %}

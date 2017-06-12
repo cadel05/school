@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+	{% for s in all %}
+	<h1> {{ s.name }} </h1>
+	{% endfor %}
+    <form action='' method="post" class='form-horizontal'>
+        {% csrf_token %}
+		<h1>Update School Address</h1>
+		{{addressForm}}	
+		<input type="submit" value="Update Address"/>
+	</form>
+{% endblock %}

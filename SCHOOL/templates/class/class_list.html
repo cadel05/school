@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>Classes</h1>
+	<ul>
+		{% for s in object_list %}
+		<li> Teacher - {{s.teacher}}, Class Name- {{ s.class_name.class_name }}
+		
+		{% if s.class_name.class_departments %}
+		 - {{ s.class_name.class_departments }}
+		{% endif %}
+		
+		{% for p in s.subject.all %}
+			,Subject - {{p.subject}}</li>
+		{% endfor %}
+		<li> <a href="/class/class/update/{{s.pk}}">Update Class</a></li>
+		{% endfor %}
+	</ul>
+{% endblock %}

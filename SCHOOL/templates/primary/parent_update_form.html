@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+  
+    <form action='' method="post" class='form-horizontal'>
+        {% csrf_token %}
+            <h1>Update Parent Profile</h1>
+		
+				{{userform}}
+				{{parentform}}
+			
+		<input type="submit"/>
+	</form>
+
+
+{% endblock %}

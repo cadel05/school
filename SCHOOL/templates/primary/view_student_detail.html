@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Registered Students Details</h1>
+
+    {% if all %}
+	<table class="table">
+    {% for s in all %}
+		<tr>
+			<th>Gender</th> <td> {{ s.gender }} </td>
+		</tr>
+		<tr>
+			<th>Student</th>
+			<td> 
+					First Name: {{ s.student.first_name }} <br>
+					Last Name: {{ s.student.last_name }}</br>
+					Email: {{ s.student.email }}</br>
+			</td>
+		</tr>
+		<tr>
+			<th>Parents</th>
+			<td>
+				<ol>
+				{% for p in s.parent.all %}
+					<li>First Name: {{ p.parent.first_name }}<br>
+						Last Name {{ p.parent.last_name }}<br>
+						Email: {{ p.parent.email }}<br>
+						Cell Phone: {{ p.cell_phone }}<br>
+						Work Name: {{ p.work_name }}<br>
+						Work Phone: {{ p.work_phone }}<br>
+						Relationship: {{ p.relationship }}<br>
+						Home Address: {{p.address}}
+						<a href="/school/view/parent/detail/{{p.id}}">View Details</a>
+					</li>
+				{% endfor %}
+				</ol>
+			</td>
+		</tr>
+		<tr>
+			<th>Date of Birth</th>
+			<td>
+				{{s.dob}}
+			</td>
+		</tr>
+		<tr>
+			<th>Allergies</th>
+			<td>
+				{{s.allergies}}
+			</td>
+		</tr>
+		<tr>
+			<th>Medical Conditions</th>
+			<td>
+				{{s.medical_conditions}}
+			</td>
+		</tr>
+		<tr>
+			<th> Address </th>
+			<td>
+				<ol>
+				{% for a in s.address.all %}
+					<li> 
+						{{ a.street }}
+						<br>
+						{% if a.town %}
+							{{ a.town}}
+							<br/>
+						{% endif %}
+						{% if a.city %}
+							{{a.city
+							<br>
+						{% endif %}
+						
+						{{a.country}}
+						<br/><a href="/school/view/student/update/address/{{s.id}}/{{a.id}}">Update Address</a>
+					</li>
+				{% endfor %}
+				<hr/>
+				</ol>
+		</tr>
+		<tr>
+			<td></td>
+			<td><a href="/school/view/student/update/{{s.id}}">Update Profile</a></td>
+      </tr>
+      {% endfor %}
+
+    </table>
+    {% else %}
+      <p>There are no students registered.</p>
+    {% endif %}       
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>Class Registration</h1>
+	<table class='table table-striped'>
+	{% for s in student %}
+		<tr>
+			<th>Student Name </th>
+			<th>Student DOB </th>
+			<th>Student Current Class</th>
+			<th>Parents</th>
+			<th>Parents</th>
+			<th>Register</th>
+		</tr>
+		<tr>
+			<td> {{s.student.first_name}} {{s.student.last_name}} </td>
+			<td> {{s.dob}} </td>
+			{% if register %}
+				{% for r in register %}
+					<td>{{r.class_name}}</td>
+				{% endfor %}
+			{% else %}
+				<td>New Student</td>
+			{% endif %}
+			{% for p in s.parent.all %}
+			<td> {{p.parent}} </td>
+			{% endfor %}
+		</tr>
+	{% endfor %}
+	{% for s in school %}
+		<td>{{ s.type }}</td>
+		{% if s.type == 'P' %}
+		
+		<form action="" method="post" class='form-horizontal'>
+        {% csrf_token %}
+			<tr><td>{{form}}</td></tr>
+			<tr><td><input type='Submit' value='Register'/></tr></td>
+		</form>
+		{% endif %}
+		
+		{% if s.type == 'S' %}
+			<h3>If Student is of age to pick subjects such as in Form 3 or Form 4 Click Select Subjects Button</h3>
+			<form action="" method="post" class='form-horizontal'>
+			{% csrf_token %}
+			<tr><td>{{form}}</td></tr>
+			<tr><td><input type='Submit' value='Register'/></tr></td> 		
+		</form>
+		
+		<form action="" method="post" class='form-horizontal'>
+        {% csrf_token %}
+		<tr><td>{{subjects_form}}</td></tr>
+		<tr><td><input type='Submit' value='Select Subjects'/></tr></td> 		
+		</form>
+		{% endif %}
+	{% endfor %}
+	</table>
+{% endblock %}

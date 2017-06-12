@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+  
+    <form action='' method="post" class='form-horizontal'>
+        {% csrf_token %}
+			{% if all %}
+				<h1>Update Student Home Address</h1>
+			{% else %}
+				<h1>Update Parent Home Address</h1>
+			{% endif %}
+				{{addressForm}}
+			
+		<input type="submit" value="Update Address"/>
+	</form>
+
+
+{% endblock %}

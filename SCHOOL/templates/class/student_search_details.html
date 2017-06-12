@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>List Students</h1>
+	<ul>
+		{% if not student %}
+			Nothing returned.
+		{% endif %}
+		{% for s in student %}
+			<li> {{ s.student.first_name }}</li>
+			<li> {{ s.student.last_name }}</li>
+			<li> {{ s.dob }}</li>
+			<!-- Must choose class first  -->
+			{% for p in s.parent.all %}
+				<li> {{ p }}</li>
+			{% endfor %}
+			{% for r in s.studentregisterclass_set.all %}
+				<li>{{ r.class_name }}</li>
+			{% endfor %}
+			<li> <a href="/class/student/register/{{s.pk}}/{{s.student.id}}/">Register for Classes</a></li>
+		{% endfor %}
+	</ul>
+{% endblock %}

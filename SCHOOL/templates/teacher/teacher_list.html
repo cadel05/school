@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>List of Teachers</h1>
+	<ul>
+		{% for s in object_list %}
+		<li> {{ s.teacher.first_name }} {{ s.teacher.last_name }}</li>
+
+		<li> <a href="/school/view/teacher/update/{{s.pk}}">Update Teacher</a></li>
+		{% endfor %}
+	</ul>
+{% endblock %}

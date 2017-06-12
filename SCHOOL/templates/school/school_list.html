@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>Schools</h1>
+	<ul>
+		{% for s in object_list %}
+		<li> {{ s.name }}</li>
+		<li>Address: {{s.address}} <a href='/school/update/address/{{s.address.pk}}/{{s.pk}}/'>Update</a></li>
+		<li> <a href="/school/update/{{s.pk}}">Update School</a></li>
+		{% endfor %}
+	</ul>
+{% endblock %}

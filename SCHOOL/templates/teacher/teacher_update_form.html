@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+  
+    <form action='' method="post" class='form-horizontal'>
+        {% csrf_token %}
+            <h1>Update Teacher Profile</h1>
+		
+				{{userform}}
+				{{teacherform}}
+			
+		<input type="submit"/>
+	</form>
+
+
+{% endblock %}

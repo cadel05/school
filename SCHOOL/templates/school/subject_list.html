@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h1>School Subjects</h1>
+	<ul>
+		{% for s in object_list %}
+		<li> {{ s.subject }}</li>
+		<li> <a href="/school/subject/update/{{s.pk}}">Update Subject</a></li>
+		{% endfor %}
+	</ul>
+{% endblock %}

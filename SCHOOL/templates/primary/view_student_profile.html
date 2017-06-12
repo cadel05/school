@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Registered Students List</h1>
+
+    {% if all %}
+	<table class="table">
+		<tr>
+			<th>Gender</th><th>Student</th><th>Parents</th><th>View Details</th>
+		</tr>
+    {% for s in all %}
+      <tr>
+		<td> {{ s.gender }} </td>
+		<td> {{ s.student }} </td>
+		<td>
+			<ol>
+			{% for p in s.parent.all %}
+				<li>{{ p }}</li>
+			{% endfor %}
+			</ol>
+		</td>
+        <td><a href="/school/view/student/detail/{{s.id}}">Details</a></td>
+      </tr>
+      {% endfor %}
+
+    </table>
+    {% else %}
+      <p>There are no students registered.</p>
+    {% endif %}       
+{% endblock %}
