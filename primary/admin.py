@@ -1,19 +1,16 @@
 from django.contrib import admin
 
-from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from django.contrib.auth.models import User
-# Register your models here.
-from primary.models import Address, School, Subject, Booklist, Parent_Guardian, Teacher
-from primary.models import Family, Class, Student, FamilyMember
-from primary.models import Parent_Address, Student_Address, StudentRegisterClass, StudentAttendsClass
-from primary.models import Homework, Reports, Test, ClassName
+from primary.models import *
+
 
 class ClassNameAdmin(admin.ModelAdmin):
-	list_display = ('class_name','class_departments')
+    list_display = ['class_name',]
+
 
 class ClassAdmin(admin.ModelAdmin):
-	list_display = ('class_name', 'teacher')
-	
+    list_display = ['class_name', 'teacher',]
+
+
 admin.site.register(ClassName, ClassNameAdmin)
 admin.site.register(Address)
 admin.site.register(School)

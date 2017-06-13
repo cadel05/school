@@ -26,32 +26,66 @@
 			<td> {{p.parent}} </td>
 			{% endfor %}
 		</tr>
+        <script>
+            $(document).ready(function () {
+                $('.table').on('change', '#id_class_name', function () {
+                    console.log('changed');
+                    // get class departments
+                    $.get('{% url "register_class" s.id s.student.id %}' + '?class=' + $(this).val(), function(rdata){
+{#                        console.log(rdata);#}
+                        var cb;
+                        var deparment_select = $('#department_dd');
+                        var sub_table = $('#select_subjects');
+                        deparment_select.empty();
+                        console.log(rdata);
+                        sub_table.empty();
+                        $.each(rdata, function(i, data){
+                            sub_table.append('<tr><td><input type="checkbox"></td><td>'+ data[0] +'</td><td>'+ data[1] +'</td><td>'+ data[2] +'</td><td>'+ data[3] +'</td></tr>')
+{##}
+{#                            cb+='<option value="'+data.id+'">'+data+'</option>';#}
+                        });
+{#                        deparment_select.append(cb);#}
+                    }, "json");
+                });
+            })
+        </script>
 	{% endfor %}
 	{% for s in school %}
 		<td>{{ s.type }}</td>
-		{% if s.type == 'P' %}
-		
-		<form action="" method="post" class='form-horizontal'>
-        {% csrf_token %}
-			<tr><td>{{form}}</td></tr>
-			<tr><td><input type='Submit' value='Register'/></tr></td>
-		</form>
-		{% endif %}
+{#		{% if s.type == 'P' %}#}
+{#		#}
+{#		<form action="" method="post" class='form-horizontal'>#}
+{#        {% csrf_token %}#}
+{#			<tr><td>{{form}}</td></tr>#}
+{#			<tr><td><input type='Submit' value='Register'/></tr></td>#}
+{#		</form>#}
+{#		{% endif %}#}
 		
 		{% if s.type == 'S' %}
 			<h3>If Student is of age to pick subjects such as in Form 3 or Form 4 Click Select Subjects Button</h3>
 			<form action="" method="post" class='form-horizontal'>
 			{% csrf_token %}
 			<tr><td>{{form}}</td></tr>
-			<tr><td><input type='Submit' value='Register'/></tr></td> 		
+			<tr><td><input type='Submit' value='Register'/></tr></td>
 		</form>
+
+
 		
-		<form action="" method="post" class='form-horizontal'>
-        {% csrf_token %}
-		<tr><td>{{subjects_form}}</td></tr>
-		<tr><td><input type='Submit' value='Select Subjects'/></tr></td> 		
-		</form>
+{#		<form action="" method="post" class='form-horizontal'>#}
+{#        {% csrf_token %}#}
+{#            <tr><td><b>Department Name: </b></td><td>#}
+{#            <select id="department_dd"></select>#}
+{#        </td></tr>#}
+{#		<tr><td><input type='Submit' value='Select Subjects'/></tr></td>#}
+{#		</form>#}
 		{% endif %}
 	{% endfor %}
 	</table>
+
+    <table id="select_subjects" class="table ">
+
+    </table>
+
+
+
 {% endblock %}
