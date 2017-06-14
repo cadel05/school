@@ -215,8 +215,15 @@ def classRegistration(request, student_id, user_id):
                     src.save()
                 except:
                     pass
-            print reg_class_ids
             return HttpResponse('OK')
+        if 'rc_del' in request.GET and request.GET['rc_del'] is not None:
+            try:
+                src = StudentRegisterClass.objects.get(pk=request.GET['rc_del'])
+                src.delete()
+                return HttpResponse('OK')
+            except Exception as e:
+                logging.error(e)
+                return HttpResponse('Err', status=500)
         if (student_id):
             subject = Subject.objects.all()
             classes = Class.objects.filter(subject__in=subject)

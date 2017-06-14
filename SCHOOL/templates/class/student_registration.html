@@ -28,8 +28,16 @@
 		</tr>
         <script>
             $(document).ready(function () {
+                $('#id_class_name').prop('selectedIndex',0);
+                $("#ckbCheckAll").removeAttr('checked');
+                $("#ckbCheckAll").click(function () {
+                    $(".checkBoxClass").prop('checked', $(this).prop('checked'));
+                });
+
                 $('.table').on('change', '#id_class_name', function () {
                     console.log('changed');
+                    $("#ckbCheckAll").removeAttr('checked');
+                    $(".checkBoxClass").removeAttr('checked');
                     // get class departments
                     $.get('{% url "register_class" s.id s.student.id %}' + '?class=' + $(this).val(), function(rdata){
                         var deparment_select = $('#department_dd');
@@ -37,12 +45,11 @@
                         deparment_select.empty();
                         sub_table.empty();
                         $.each(rdata, function(i, data){
-                            sub_table.append('<tr><td><input type="checkbox" id="'+ data[4] +'"></td><td>'+ data[0] +'</td><td>'+ data[1]
+                            sub_table.append('<tr><td><input type="checkbox" class="checkBoxClass" id="'+ data[4] +'"></td><td>'+ data[0] +'</td><td>'+ data[1]
                                 +'</td><td>'+ data[2] +'</td><td>'+ data[3] +'</td></tr>')
                         });
                     }, "json");
                 });
-
 
                 $('.register-selected-classes').click(function () {
                     console.log($('#select_subjects').find('input[type="checkbox"]:checked'));
@@ -53,11 +60,17 @@
                     });
                     $.get('{% url "register_class" s.id s.student.id %}' + '?reg_class=' + selected_classes, function(rdata){
                         location.reload();
-                    })
-
+                    });
                 });
+                
+                $('.delete-subject').click(function () {
+                    var del_row = $(this);
+                    $.get('{% url "register_class" s.id s.student.id %}' + '?rc_del=' + $(this).attr('data-id'), function(){
+                        console.log($(this));
+                        del_row.parent().parent().remove();
+                    });
 
-
+                })
             });
 
         </script>
@@ -96,7 +109,7 @@
 
     <table id="" class="table ">
         <tr>
-            <th>Select</th>
+            <th>Select<br/><input type="checkbox" id="ckbCheckAll" /></th>
             <th>Subject</th>
             <th>Teacher</th>
             <th>Class</th>
@@ -118,6 +131,7 @@
         <th>Teacher</th>
         <th>Class</th>
         <th>Day and Time</th>
+        <th>Action</th>
     </tr>
     {% for rc in reg_classes %}
 {#        {%  for sub in rc.class_name.subject.all %}#}
@@ -131,6 +145,7 @@
             <td>{{ rc.class_name.teacher }}</td>
             <td>{{ rc.class_name }}</td>
             <td>{{ rc.class_name.classDaysandTime }}</td>
+            <td><a class="btn delete-subject" data-id="{{ rc.id }}"><i class="glyphicon glyphicon-trash"></i></a></td>
         </tr>
 {#        {% endfor %}#}
     {% endfor %}
