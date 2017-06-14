@@ -200,11 +200,23 @@ def classRegistration(request, student_id, user_id):
                 class_name = ClassName.objects.get(pk=int(request.GET['class']))
                 classes = Class.objects.filter(class_name=class_name)
                 l = [[", ".join([s.subject for s in x.subject.all()]), x.teacher.teacher.get_full_name(),
-                      x.class_name.class_name, x.classDaysandTime] for x in classes]
+                      x.class_name.class_name, x.classDaysandTime, x.id] for x in classes]
                 return HttpResponse(json.dumps(l))
             except Exception as e:
                 logging.error(e)
                 return HttpResponse(e)
+        if 'reg_class' in request.GET and request.GET['reg_class'] is not None:
+            reg_class_ids = list(request.GET['reg_class'])
+            for rci in reg_class_ids:
+                try:
+                    class_to_reg = Class.objects.get(pk=rci)
+                    student = Student.objects.get(pk=student_id)
+                    src = StudentRegisterClass(student=student, class_name=class_to_reg)
+                    src.save()
+                except:
+                    pass
+            print reg_class_ids
+            return HttpResponse('OK')
         if (student_id):
             subject = Subject.objects.all()
             classes = Class.objects.filter(subject__in=subject)
@@ -212,6 +224,7 @@ def classRegistration(request, student_id, user_id):
             user = User.objects.filter(id=user_id)
             school = School.objects.all()
             current_year = timezone.now().year
+            reg_classes = StudentRegisterClass.objects.filter(student=student[0])
             # register = StudentRegisterClass.objects.filter(student = student, academic_year__openDate__year = current_year)
             register = StudentRegisterClass.objects.filter(student=student)
             if (not register):
@@ -227,6 +240,7 @@ def classRegistration(request, student_id, user_id):
                               'student': student,
                               'user': user,
                               'register': register,
+                              'reg_classes': reg_classes,
                               'school': school,
                               'form': form,
                               'subjects_form': subjects_form,

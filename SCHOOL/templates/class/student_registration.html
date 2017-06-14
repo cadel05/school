@@ -32,22 +32,34 @@
                     console.log('changed');
                     // get class departments
                     $.get('{% url "register_class" s.id s.student.id %}' + '?class=' + $(this).val(), function(rdata){
-{#                        console.log(rdata);#}
-                        var cb;
                         var deparment_select = $('#department_dd');
                         var sub_table = $('#select_subjects');
                         deparment_select.empty();
-                        console.log(rdata);
                         sub_table.empty();
                         $.each(rdata, function(i, data){
-                            sub_table.append('<tr><td><input type="checkbox"></td><td>'+ data[0] +'</td><td>'+ data[1] +'</td><td>'+ data[2] +'</td><td>'+ data[3] +'</td></tr>')
-{##}
-{#                            cb+='<option value="'+data.id+'">'+data+'</option>';#}
+                            sub_table.append('<tr><td><input type="checkbox" id="'+ data[4] +'"></td><td>'+ data[0] +'</td><td>'+ data[1]
+                                +'</td><td>'+ data[2] +'</td><td>'+ data[3] +'</td></tr>')
                         });
-{#                        deparment_select.append(cb);#}
                     }, "json");
                 });
-            })
+
+
+                $('.register-selected-classes').click(function () {
+                    console.log($('#select_subjects').find('input[type="checkbox"]:checked'));
+                    var selected_classes = [];
+                    $('#select_subjects').find('input[type="checkbox"]:checked').each(function () {
+                        console.log($(this).attr('id'));
+                        selected_classes.push($(this).attr('id'))
+                    });
+                    $.get('{% url "register_class" s.id s.student.id %}' + '?reg_class=' + selected_classes, function(rdata){
+                        location.reload();
+                    })
+
+                });
+
+
+            });
+
         </script>
 	{% endfor %}
 	{% for s in school %}
@@ -66,7 +78,7 @@
 			<form action="" method="post" class='form-horizontal'>
 			{% csrf_token %}
 			<tr><td>{{form}}</td></tr>
-			<tr><td><input type='Submit' value='Register'/></tr></td>
+{#			<tr><td><input type='Submit' value='Register'/></tr></td>#}
 		</form>
 
 
@@ -82,10 +94,50 @@
 	{% endfor %}
 	</table>
 
-    <table id="select_subjects" class="table ">
+    <table id="" class="table ">
+        <tr>
+            <th>Select</th>
+            <th>Subject</th>
+            <th>Teacher</th>
+            <th>Class</th>
+            <th>Day and Time</th>
+        </tr>
+    <tbody id="select_subjects">
+
+    </tbody>
+    <tr><td><a class="btn btn-default register-selected-classes">Register</a></td></tr>
 
     </table>
 
+    <h1>Student already registered classes</h1>
 
+    <table class="table">
+    <tr>
+        <th>Select</th>
+        <th>Subject</th>
+        <th>Teacher</th>
+        <th>Class</th>
+        <th>Day and Time</th>
+    </tr>
+    {% for rc in reg_classes %}
+{#        {%  for sub in rc.class_name.subject.all %}#}
+        <tr>
+            <td><input type="checkbox" value="{{ rc.id }}"></td>
+{#            <td>{{ sub }}</td>#}
+            <td>
+                {% for sub in rc.class_name.subject.all %}
+                    {{ sub }},
+                {% endfor %}</td>
+            <td>{{ rc.class_name.teacher }}</td>
+            <td>{{ rc.class_name }}</td>
+            <td>{{ rc.class_name.classDaysandTime }}</td>
+        </tr>
+{#        {% endfor %}#}
+    {% endfor %}
+    </table>
+
+<script>
+
+</script>
 
 {% endblock %}

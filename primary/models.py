@@ -238,8 +238,8 @@ class Student_Address(models.Model):
 
 class StudentRegisterClass(models.Model):
     student = models.ForeignKey(Student)
-    class_name = models.ForeignKey(Class)
-    date = models.DateField(default=date.today)
+    class_name = models.ForeignKey(Class)   # should be named as class NOT class_name
+    date = models.DateField(default=date.today) # use auto_now_add and auto_now_created
     comments = models.CharField(max_length=200, blank=True, null=True)
 
 
